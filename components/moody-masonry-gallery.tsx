@@ -1,14 +1,15 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
-import { Menu, User, Mail, Image } from 'lucide-react'
+import Image from 'next/image'
+import { useState, useEffect } from 'react'
+import { Menu, User, Mail, ImageIcon } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from "@/components/ui/sheet"
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
 
 export function MoodyMasonryGallery() {
-  const [images, setImages] = useState([
+  const [images] = useState([
     { src: "https://picsum.photos/300/300", width: 300, height: 300 },
     { src: "https://picsum.photos/300/400", width: 300, height: 400 },
     { src: "https://picsum.photos/300/350", width: 300, height: 350 },
@@ -91,7 +92,6 @@ export function MoodyMasonryGallery() {
     { src: "https://picsum.photos/300/420", width: 300, height: 420 },
   ])
   const [activeSection, setActiveSection] = useState('portfolio')
-  const scrollAreaRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -105,8 +105,8 @@ export function MoodyMasonryGallery() {
       { threshold: 0.1}
     )
 
-    const images = document.querySelectorAll('.image-container')
-    images.forEach((img) => observer.observe(img))
+    const imageElements = document.querySelectorAll('.image-container')
+    imageElements.forEach((img) => observer.observe(img))
 
     return () => observer.disconnect()
   }, [activeSection])
@@ -140,7 +140,7 @@ export function MoodyMasonryGallery() {
           <div className="columns-1 sm:columns-2 lg:columns-3 gap-1 space-y-1">
             {images.map((img, index) => (
               <div key={index} className="break-inside-avoid image-container opacity-0 transition-opacity duration-1000">
-                <img
+                <Image
                   src={img.src}
                   alt={`Gallery image ${index + 1}`}
                   width={img.width}
@@ -157,7 +157,7 @@ export function MoodyMasonryGallery() {
   return (
     <div className="min-h-screen bg-zinc-900 text-zinc-100">
       <header className="fixed top-0 right-0 p-4 z-50">
-        <h1 className="text-2xl font-bold">Will's Gallery</h1>
+        <h1 className="text-2xl font-bold">Will&apos;s Gallery</h1>
       </header>
 
       <Sheet>
@@ -182,7 +182,7 @@ export function MoodyMasonryGallery() {
                 className="text-lg text-zinc-100 hover:text-zinc-300 hover:bg-zinc-700 w-full justify-start"
                 onClick={() => setActiveSection('portfolio')}
               >
-                <Image className="mr-2 h-5 w-5" />
+                <ImageIcon className="mr-2 h-5 w-5" />
                 Portfolio
               </Button>
             </SheetClose>
