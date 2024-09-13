@@ -4,11 +4,51 @@ import { useState, useEffect, useRef } from 'react'
 import { Menu, User, Mail, Image } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from "@/components/ui/sheet"
-import { ScrollArea } from "@/components/ui/scroll-area"
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
 
 export function MoodyMasonryGallery() {
   const [images, setImages] = useState([
+    { src: "https://picsum.photos/300/300", width: 300, height: 300 },
+    { src: "https://picsum.photos/300/400", width: 300, height: 400 },
+    { src: "https://picsum.photos/300/350", width: 300, height: 350 },
+    { src: "https://picsum.photos/300/450", width: 300, height: 450 },
+    { src: "https://picsum.photos/300/380", width: 300, height: 380 },
+    { src: "https://picsum.photos/300/320", width: 300, height: 320 },
+    { src: "https://picsum.photos/300/360", width: 300, height: 360 },
+    { src: "https://picsum.photos/300/410", width: 300, height: 410 },
+    { src: "https://picsum.photos/300/330", width: 300, height: 330 },
+    { src: "https://picsum.photos/300/420", width: 300, height: 420 },
+    { src: "https://picsum.photos/300/370", width: 300, height: 370 },
+    { src: "https://picsum.photos/300/340", width: 300, height: 340 },
+    { src: "https://picsum.photos/300/390", width: 300, height: 390 },
+    { src: "https://picsum.photos/300/430", width: 300, height: 430 },
+    { src: "https://picsum.photos/300/310", width: 300, height: 310 },
+    { src: "https://picsum.photos/300/440", width: 300, height: 440 },
+    { src: "https://picsum.photos/300/350", width: 300, height: 350 },
+    { src: "https://picsum.photos/300/400", width: 300, height: 400 },
+    { src: "https://picsum.photos/300/380", width: 300, height: 380 },
+    { src: "https://picsum.photos/300/420", width: 300, height: 420 },
+    { src: "https://picsum.photos/300/300", width: 300, height: 300 },
+    { src: "https://picsum.photos/300/400", width: 300, height: 400 },
+    { src: "https://picsum.photos/300/350", width: 300, height: 350 },
+    { src: "https://picsum.photos/300/450", width: 300, height: 450 },
+    { src: "https://picsum.photos/300/380", width: 300, height: 380 },
+    { src: "https://picsum.photos/300/320", width: 300, height: 320 },
+    { src: "https://picsum.photos/300/360", width: 300, height: 360 },
+    { src: "https://picsum.photos/300/410", width: 300, height: 410 },
+    { src: "https://picsum.photos/300/330", width: 300, height: 330 },
+    { src: "https://picsum.photos/300/420", width: 300, height: 420 },
+    { src: "https://picsum.photos/300/370", width: 300, height: 370 },
+    { src: "https://picsum.photos/300/340", width: 300, height: 340 },
+    { src: "https://picsum.photos/300/390", width: 300, height: 390 },
+    { src: "https://picsum.photos/300/430", width: 300, height: 430 },
+    { src: "https://picsum.photos/300/310", width: 300, height: 310 },
+    { src: "https://picsum.photos/300/440", width: 300, height: 440 },
+    { src: "https://picsum.photos/300/350", width: 300, height: 350 },
+    { src: "https://picsum.photos/300/400", width: 300, height: 400 },
+    { src: "https://picsum.photos/300/380", width: 300, height: 380 },
+    { src: "https://picsum.photos/300/420", width: 300, height: 420 },
     { src: "https://picsum.photos/300/300", width: 300, height: 300 },
     { src: "https://picsum.photos/300/400", width: 300, height: 400 },
     { src: "https://picsum.photos/300/350", width: 300, height: 350 },
@@ -54,10 +94,6 @@ export function MoodyMasonryGallery() {
   const scrollAreaRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    if (scrollAreaRef.current) {
-      scrollAreaRef.current.style.scrollBehavior = 'smooth'
-    }
-
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -66,7 +102,7 @@ export function MoodyMasonryGallery() {
           }
         })
       },
-      { threshold: 0.1 }
+      { threshold: 0.1}
     )
 
     const images = document.querySelectorAll('.image-container')
@@ -175,8 +211,11 @@ export function MoodyMasonryGallery() {
       </Sheet>
 
       <main className="container mx-auto px-4 py-16">
-        <ScrollArea className="h-[calc(100vh-8rem)] pr-4 -mr-4">
-          {renderContent()}
+        <ScrollArea className="h-[calc(100vh-8rem)]">
+          <div className="pr-4">
+            {renderContent()}
+          </div>
+          <ScrollBar orientation="vertical" />
         </ScrollArea>
       </main>
 
@@ -185,6 +224,10 @@ export function MoodyMasonryGallery() {
           opacity: 1 !important;
         }
         
+        .ScrollAreaViewport {
+          scroll-behavior: smooth;
+        }
+
         /* Hide scrollbar for Chrome, Safari and Opera */
         .ScrollAreaViewport::-webkit-scrollbar {
           display: none;
